@@ -1,4 +1,4 @@
-package com.takahidesato.instagramviewer;
+package com.takahidesato.popularphotos;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

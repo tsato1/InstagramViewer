@@ -1,4 +1,4 @@
-package com.takahidesato.instagramviewer;
+package com.takahidesato.popularphotos;
 
 import org.junit.Test;
 
