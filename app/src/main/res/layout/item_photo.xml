@@ -1,24 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite">
+    <RelativeLayout
+        android:id="@+id/rll_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/activity_horizontal_margin">
+        <ImageView
+            android:id="@+id/imv_profile_pic"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:scaleType="center"/>
+        <TextView
+            android:id="@+id/txv_username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_toRightOf="@id/imv_profile_pic"
+            android:layout_centerVertical="true"
+            android:maxLength="20"
+            android:ellipsize="end"
+            android:text="username"/>
+        <TextView
+            android:id="@+id/txv_timestamp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="00min ago"/>
+    </RelativeLayout>
 
     <ImageView
         android:id="@+id/imv_photo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
+        android:minHeight="50dp"
+        android:layout_below="@id/rll_header"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"/>
+    <ImageView
+        android:id="@+id/imv_video_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/imv_photo"
+        android:layout_alignRight="@id/imv_photo"
+        android:layout_margin="@dimen/fab_margin"
+        android:src="@mipmap/ic_video"
+        android:visibility="gone"/>
+    <VideoView
+        android:id="@+id/vdv_video"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_below="@+id/imv_photo"
+        android:layout_centerVertical="true"
         android:adjustViewBounds="true"
         android:scaleType="fitXY"
-        android:minHeight="50dp"/>
+        android:visibility="gone"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"/>
+
+    <RelativeLayout
+        android:id="@+id/rll_likes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/vdv_video"
+        android:layout_margin="@dimen/activity_vertical_margin">
+        <ImageView
+            android:id="@+id/imv_like"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@mipmap/like"/>
+        <TextView
+            android:id="@+id/txv_likes_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/imv_like"
+            android:layout_centerVertical="true"
+            android:text="likes count"/>
+    </RelativeLayout>
+
     <TextView
         android:id="@+id/txv_caption"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@id/imv_photo"
-        android:text="test"
-        android:textSize="20sp"
+        android:layout_marginLeft="@dimen/activity_vertical_margin"
+        android:layout_marginRight="@dimen/activity_vertical_margin"
+        android:layout_marginBottom="@dimen/activity_horizontal_margin"
+        android:layout_below="@id/rll_likes"
+        android:textSize="18sp"
         android:maxLines="3"
         android:ellipsize="end"/>
 </RelativeLayout>

@@ -21,6 +21,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import cz.msebera.android.httpclient.Header;
 
 public class MainActivity extends AppCompatActivity {
@@ -36,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        ButterKnife.bind(this);
 
         mPhotoItemArrayList = new ArrayList<>();
         mPhotoItemAdapter = new PhotoItemAdapter(this, mPhotoItemArrayList);
@@ -61,21 +65,24 @@ public class MainActivity extends AppCompatActivity {
         client.get(url, null, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                Log.d("test", response.toString());
-
                 JSONArray photos = null;
                 try {
                     JSONArray photosJArray = response.getJSONArray("data");
                     for (int i = 0; i < photosJArray.length(); i++) {
                         JSONObject photoJObj = photosJArray.getJSONObject(i);
                         PhotoItem item = new PhotoItem();
+                        item.type = photoJObj.getString("type");
                         item.username = photoJObj.getJSONObject("user").getString("username");
+                        item.userPhotoUrl = photoJObj.getJSONObject("user").getString("profile_picture");
                         item.caption = photoJObj.getJSONObject("caption").getString("text");
                         item.imageUrl = photoJObj.getJSONObject("images").getJSONObject("standard_resolution").getString("url");
+                        item.videoUrl = item.type.equals("video")? photoJObj.getJSONObject("videos").getJSONObject("standard_resolution").getString("url"):null;
                         item.imageHeight = photoJObj.getJSONObject("images").getJSONObject("standard_resolution").getInt("height");
                         item.likesCount = photoJObj.getJSONObject("likes").getInt("count");
-                        item.createdTime = photoJObj.getJSONObject("caption").getInt("created_time");
+                        item.createdTime = photoJObj.getInt("created_time");
                         mPhotoItemArrayList.add(item);
+
+                        //Log.d("imageurl", item.imageUrl);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -87,30 +94,8 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                Log.i(MainActivity.class.getSimpleName(), "AsyncHttp Failed");
+                Log.e(MainActivity.class.getSimpleName(), "AsyncHttp Failed");
             }
         });
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 }
