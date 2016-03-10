@@ -1,6 +1,6 @@
 # Week 1 - *PopularPhotos*
 
-**PopularPhotos** is an android app that showcases popular Instagram photos with several information of who posted it, how old it is, how many likes it has got and comments about it.
+**PopularPhotos** is an Android application that showcases popular Instagram photos with several information of who posted it, how old it is, how many likes it has got and comments about it.
 
 Submitted by: **Takahide Sato**
 
