@@ -2,7 +2,7 @@
 
 **PopularPhotos** is an Android application that showcases popular Instagram photos with several information of who posted it, how old it is, how many likes it has got and comments about it.
 
-CodePath Course Project : Submitted by: **Takahide Sato**
+CodePath Course Project / Submitted by : **Takahide Sato**
 
 Time spent: **7** hours spent in total
 
